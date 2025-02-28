@@ -9,6 +9,10 @@
 MWwxGuiStarter is using 
 **[MarkWareVCMake](https://github.com/tomasmark79/MarkWareVCMake)** project template.  
 
+![Snímek obrazovky z 2025-02-28 15-29-04](https://github.com/user-attachments/assets/03efdf97-c617-4816-88e1-656074ed0391)
+![Snímek obrazovky z 2025-02-28 15-29-08](https://github.com/user-attachments/assets/dec7f6ef-58b7-4155-b4de-4acb8e98d0b6)
+
+
 ## To Do
 
  - create Conan package recipe from library target

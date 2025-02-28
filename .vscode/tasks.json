@@ -1,0 +1,191 @@
+{
+    /* MIT License
+       Copyright (c) 2024-2025 Tomáš Mark */
+    "version": "2.0.0",
+    "inputs": [
+        {
+            /* MENU ITEMS */
+            "id": "taskName",
+            "type": "pickString",
+            "description": "Select MarkWare Task",
+            "options": [
+                "🚀 Zero to Build",
+                "🦸 Zero to Hero",
+                "🧹 Clean folder",
+                "🗡️ Conan install",
+                "🔧 CMake configure",
+                "🪲 CMake configure with debugger",
+                "🔨 Build",
+                "📜 Collect Licenses",
+                "📌 Install Artefacts",
+                "📦 Release Tarballs",
+                "🛸 Run CPack",
+                "",
+                "🔍 clang-tidy",
+                "📐 clang-format",
+                "📏 cmake-format",
+                "",
+                "⚔️ conan create library recipe",
+                "📊 conan graph.html",
+            ],
+            "default": "🔨 Build"
+        },
+        {
+            /* PRODUCT ITEMS */
+            "id": "buildProduct",
+            "type": "pickString",
+            "description": "Select target product",
+            "options": [
+                "standalone",
+                "library",
+                "both"
+            ],
+            "default": "standalone"
+        },
+        {
+            /* ARCH ITEMS */
+            "id": "buildArch",
+            "type": "pickString",
+            "description": "Select target architecture",
+            "options": [
+                "default",
+                "x86_64-clang-linux-gnu",
+                "x86_64-w64-mingw32",
+                "aarch64-rpi4-linux-gnu"
+            ],
+            "default": "default"
+        },
+        {
+            /* BUILD TYPE ITEMS */
+            "id": "buildType",
+            "type": "pickString",
+            "description": "Select type of build",
+            "options": [
+                "Debug",
+                "Release",
+                "RelWithDebInfo",
+                "MinSizeRel"
+            ],
+            "default": "Debug"
+        },
+    ],
+    "tasks": [
+        {
+            "label": "Launch Standalone",
+            "type": "shell",
+            "command": "${workspaceFolder}/build/standalone/default/debug/MWwsWidgets",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "Launch Standalone",
+            "problemMatcher": [],
+            "dependsOn": [
+                /* "clear terminal" */ /* uncomment if you want to clear terminal before each task */
+            ]
+        },
+        {
+            /* TASKS RUN */
+            "label": "MarkWare Tasks",
+            "type": "shell",
+            "command": "python3",
+            "args": [
+                "${workspaceFolder}/SolutionController.py",
+                "${input:buildProduct}",
+                "${input:taskName}",
+                "${input:buildArch}",
+                "${input:buildType}"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "MarkWare Tasks",
+            "problemMatcher": [],
+            "dependsOn": [
+                /* "clear terminal" */ /* uncomment if you want to clear terminal before each task */
+            ]
+        },
+        {
+            /* DIRECT BUILD (NO MENU) */
+            "label": "Direct Build",
+            "type": "shell",
+            "command": "python3",
+            "args": [
+                "${workspaceFolder}/SolutionController.py",
+                "standalone",
+                "🔨 Build",
+                "default",
+                "Debug"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "detail": "Direct Build",
+            "problemMatcher": []
+        },
+        {
+            /* DIRECT CLANG-TIDY C/C++ ( NEED MENU )  */
+            "label": "clang-tidy",
+            "type": "shell",
+            "command": "python3",
+            "args": [
+                "${workspaceFolder}/SolutionController.py",
+                "${input:buildProduct}",
+                "🔍 clang-tidy",
+                "${input:buildArch}",
+                "${input:buildType}"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "detail": "clang-tidy",
+            "problemMatcher": []
+        },
+        {
+            /* DIRECT CLANG-FORMAT */
+            "label": "clang-format",
+            "type": "shell",
+            "command": "python3",
+            "args": [
+                "${workspaceFolder}/SolutionController.py",
+                "both",
+                "📐 clang-format",
+                "noNeedArch"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "detail": "clang-format",
+            "problemMatcher": []
+        },
+        {
+            /* DIRECT CMAKE-FORMAT */
+            "label": "cmake-format",
+            "type": "shell",
+            "command": "python3",
+            "args": [
+                "${workspaceFolder}/SolutionController.py",
+                "both",
+                "📏 cmake-format",
+                 "noNeedArch"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "detail": "cmake-format",
+            "problemMatcher": []
+        },
+        { /* CLEAR TERMINAL */
+            "label": "clear terminal",
+            "type": "shell",
+            "command": "clear",
+            "group": "none",
+            "problemMatcher": []
+        }
+    ]
+}

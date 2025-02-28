@@ -6,7 +6,7 @@
 
 ## Overview
 
-MWwxGuiStarter is using 
+MWwxWidgetsStarter is using 
 **[MarkWareVCMake](https://github.com/tomasmark79/MarkWareVCMake)** project template.  
 
 ![Snímek obrazovky z 2025-02-28 15-29-04](https://github.com/user-attachments/assets/03efdf97-c617-4816-88e1-656074ed0391)
